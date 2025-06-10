@@ -1,0 +1,190 @@
+<div class="my-5">
+  <form class="container row" (ngSubmit)="addNewItem()" [formGroup]="createItemForm">
+    <div class="col-md-4">
+      <label for="categoryId" class="col-form-label">المجموعة الفرعية</label>
+      <select class=" form-select" id="categoryId" formControlName="categoryId">
+        <option [value]="null">اختر مجموعة فرعية</option>
+        <option [value]="subCategory.id" *ngFor="let subCategory of subsCategories">
+          {{ subCategory.name_AR }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="code" class="col-form-label">كود الصنف</label>
+      <input type="text" id="code" class="form-control" formControlName="code" />
+    </div>
+
+    <div class="col-md-4">
+      <label for="barCode" class="col-form-label">الباركود</label>
+      <input type="text" id="barCode" class="form-control" formControlName="barCode" />
+    </div>
+
+    <div class="col-md-12">
+      <label for="descriptionAr" class="col-form-label">
+        وصف الصنف عربي
+      </label>
+      <input type="text" class="form-control" id="descriptionAr" formControlName="descriptionAr" />
+    </div>
+
+    <div class="col-md-12">
+      <label for="descriptionEn" class="col-form-label">
+        وصف الصنف انجليزي
+      </label>
+      <input type="text" class="form-control" id="descriptionEn" formControlName="descriptionEn" />
+    </div>
+
+    <div class="col-md-4">
+      <label for="shortDescription" class="col-form-label">
+        الوصف المختصر
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="shortDescription"
+        formControlName="shortDescription"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="brandDescription" class="col-form-label">توصيف الماركة</label>
+      <input
+        type="text"
+        class="form-control"
+        id="brandDescription"
+        formControlName="brandDescription"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="originCountry" class="col-form-label">
+        بلد المنشأ
+      </label>
+      <input type="text" class="form-control" id="originCountry" formControlName="originCountry" />
+    </div>
+
+    <!-- <div class="col-md-8"> -->
+    <!-- TODO: change form control and binding data -->
+    <!-- <label for="______" class="col-form-label">المورد</label> -->
+    <!-- <select class=" form-select" id="______" formControlName="______"> -->
+    <!-- <option [value]="null">اختر مورد</option> -->
+    <!-- <option [value]="1">مورد 1</option> -->
+    <!-- <option [value]="exporter.id" *ngFor="let exporter of [{ id: 0, name_AR: 'مورد 1' }]">
+          {{ exporter.name_AR }}
+        </option> -->
+    <!-- </select> -->
+    <!-- </div> -->
+
+    <!-- <div class="col-md-4">
+      <div class="col-md-12">
+        <label for="price" class="col-form-label">السعر</label>
+        <input type="number" class="form-control" id="price" formControlName="price" />
+      </div>
+    </div> -->
+
+    <div class="col-md-4">
+      <label for="measruingUnit" class="col-form-label">وحدة القياس</label>
+      <input type="text" class="form-control" id="measruingUnit" formControlName="measruingUnit" />
+    </div>
+    <div class="col-md-4">
+      <label for="packageCapacity" class="col-form-label">سعة العبوة</label>
+      <input
+        type="text"
+        class="form-control"
+        id="packageCapacity"
+        formControlName="packageCapacity"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="unitWeight" class="col-form-label">وزن الوحدة</label>
+      <input type="text" class="form-control" id="unitWeight" formControlName="unitWeight"
+      (input)="acceptNumbersOnly($event,'unitWeight')"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="discount" class="col-form-label">الخصم</label>
+      <select class=" form-select" id="discount" formControlName="discount">
+        <option [value]="discount.Yes">نعم</option>
+        <option [value]="discount.No">لا</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="discountType" class="col-form-label">نوع الخصم</label>
+      <select class="form-select" id="discountType" formControlName="discountType">
+        <option [value]="discountType.noType">اختر نوع الخصم</option>
+        <option [value]="discountType.value">قيمة</option>
+        <option [value]="discountType.percentage">نسبة</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="transactionClose" class="col-form-label">اقفال التعامل</label>
+      <select class=" form-select" id="transactionClose" formControlName="transactionClose">
+        <option [value]="transactionClose.Yes">نعم</option>
+        <option [value]="transactionClose.No">لا</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="purchaseTax" class="col-form-label">ض.منبع شراء</label>
+      <select class="form-select" id="purchaseTax" formControlName="purchaseTax">
+        <option [value]="purchaseTaxEnum.Yes">نعم</option>
+        <option [value]="purchaseTaxEnum.No">لا</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="valueAddedTaxPurchase" class="col-form-label">
+        ضريبة القيمة المضافة مع الشراء
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="valueAddedTaxPurchase"
+        formControlName="valueAddedTaxPurchase"
+        (input)="acceptNumbersOnly($event,'valueAddedTaxPurchase')"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="saleTax" class="col-form-label">ض.منبع بيع</label>
+      <select class="form-select" id="saleTax" formControlName="saleTax">
+        <option [value]="saleTaxEnum.Yes">نعم</option>
+        <option [value]="saleTaxEnum.No">لا</option>
+      </select>
+    </div>
+
+
+    <div class="col-md-4">
+      <label for="valueAddedTaxSales" class="col-form-label">
+        ضريبة القيمة المضافة مع البيع
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="valueAddedTaxSales"
+        formControlName="valueAddedTaxSales"
+        (input)="acceptNumbersOnly($event,'valueAddedTaxSales')"
+        />
+    </div>
+
+    <!-- TODO: Change Form Controls Name and add them to the form and Enum-->
+    <!-- <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="______" class="col-form-label">الحد الادني للمخزون</label>
+          <input type="number" class="form-control" id="______" formControlName="______" />
+        </div>
+        <div class="col-md-4">
+          <label for="______" class="col-form-label">حد اعادة الطلب</label>
+          <input type="number" class="form-control" id="______" formControlName="______" />
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <button class="btn btn-primary col-2 mt-5 fw-semibold">اضافة</button>
+      <div class="col-10"></div>
+      <a [routerLink]="['/items/grid']" class="d-inline-block col-2">العودة للقائمة</a>
+    </div>
+  </form>
+</div>

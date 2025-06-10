@@ -1,0 +1,35 @@
+<div class="d-flex flex-row align-items-center gap-2 h-100">
+  <button
+    type="button"
+    class="btn btn-sm text-primary"
+    (click)="editProvider()"
+    *ngIf="params.showEdit"
+  >
+    <i class="bi bi-pencil-square fs-4 fw-semibold"></i>
+  </button>
+  <button class="btn" (click)="deleteProvider(params.data.id)" *ngIf="params.showDelete">
+    <i class="bi bi-trash3-fill text-danger fs-4"></i>
+  </button>
+
+  <!-- <button type="button" class="btn btn-secondary" (click)="getMoreDetails()">
+    تفاصيل
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="addItemPrices()">
+    اضافة اسعار
+  </button> -->
+  <!-- <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" appToggleDropdown>
+      Dropdown button
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <button type="button" class="dropdown-item btn btn-sm" (click)="editItem()">
+          تعديل
+        </button>
+      </li>
+      <li>
+
+      </li>
+    </ul>
+  </div> -->
+</div>

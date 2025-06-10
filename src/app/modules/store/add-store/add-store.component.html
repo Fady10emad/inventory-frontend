@@ -1,0 +1,32 @@
+<div class="my-5">
+  <form class="container row" (ngSubmit)="onSubmit()" [formGroup]="addStoreForm">
+    <div class="col-md-6">
+      <label for="code" class="col-form-label">كود المخزن</label>
+      <input type="text" id="code" class="form-control" formControlName="code" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="description" class="col-form-label">الوصف</label>
+      <input type="text" id="description" class="form-control" formControlName="description" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="location" class="col-form-label">الموقع</label>
+      <input type="text" id="location" class="form-control" formControlName="location" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="responsible" class="col-form-label">المسؤول</label>
+      <input type="text" id="responsible" class="form-control" formControlName="responsible" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="phone" class="col-form-label">الهاتف</label>
+      <input type="text" id="phone" class="form-control" formControlName="phone" />
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <button type="submit" class="btn btn-primary fw-bold">إضافة المخزن</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,107 @@
+<div class="my-3">
+  <form class="container" (ngSubmit)="editItem()" [formGroup]="itemsListForStoreForm">
+    <div class="p-0 my-2 row">
+      <div class="col-md-4">
+        <label for="code" class="col-form-label">كود المخزن</label>
+        <input type="text" id="code" class="form-control" formControlName="code" />
+      </div>
+      <div class="col-md-4">
+        <label for="description" class="col-form-label">وصف المخزن</label>
+        <input type="text" id="description" class="form-control" formControlName="description" />
+      </div>
+      <div class="col-md-4">
+        <label for="responsible" class="col-form-label">المسئول</label>
+        <input type="text" id="responsible" class="form-control" formControlName="responsible" />
+      </div>
+      <div class="col-md-4">
+        <label for="phone" class="col-form-label">الهاتف</label>
+        <input type="text" id="phone" class="form-control" formControlName="phone" />
+      </div>
+      <div class="col-md-4">
+        <label for="location" class="col-form-label">الموقع</label>
+        <input type="text" id="location" class="form-control" formControlName="location" />
+      </div>
+    </div>
+
+    <div class="my-5">
+      <div class="p-0 my-3 row align-items-end">
+        <div class="col-md-4">
+          <label for="categoryId" class="col-form-label">المجموعة الفرعية</label>
+          <select class=" form-select" id="categoryId" formControlName="categoryId">
+            <option [value]="''">اختر مجموعة فرعية</option>
+            <option [value]="subCategory.id" *ngFor="let subCategory of subsCategories">
+              {{ subCategory.name_AR }}
+            </option>
+          </select>
+        </div>
+        <div class="ms-auto w-25">
+          <!-- <label for="pageSizeSelect" class="col-form-label">عدد العناصر في كل صفحة:</label> -->
+          <select
+            class="form-select w-25 ms-auto"
+            id="pageSizeSelect"
+            formControlName="pageSizeSelect"
+          >
+            <option *ngFor="let pageSize of pageSizes" [value]="pageSize">
+              {{ pageSize }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+
+            <th scope="col" [colSpan]="2"></th>
+            <th scope="col" [colSpan]="2">رصيد حالي متاح</th>
+            <th scope="col" [colSpan]="2">رصيد اول المدة</th>
+
+          </tr>
+          <tr>
+            <th scope="col">كود الصنف</th>
+            <th scope="col">اسم الصنف</th>
+            <th scope="col">قطعة</th>
+            <th scope="col">عبوة</th>
+            <th scope="col">قطعة</th>
+            <th scope="col">عبوة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container formArrayName="storeListFormArray">
+            <tr *ngFor="let item of storeListFormArray.controls; let i = index" [formGroupName]="i">
+              <th scope="row">{{ item.value.id }}</th>
+              <td>{{ item.value.itemName }}</td>
+              <td>
+                <input type="number" class="form-control" formControlName="currentAvailableBalancePiece"
+                readonly>
+              </td>
+              <td>
+                <input type="number" class="form-control" formControlName="currentAvailableBalancePackage"
+                readonly>
+              </td>
+              <td>
+                <input type="number" class="form-control" formControlName="balanceFirstPeriodPiece"
+                readonly>
+              </td>
+              <td>
+                <input type="number" class="form-control" formControlName="balanceFirstPeriodPackage"
+                readonly>
+              </td>
+            
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-center">
+      <app-custom-pagination
+        [currentPage]="currentPage"
+        [totalRecords]="totalRecords"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      ></app-custom-pagination>
+    </div>
+    <button class="btn btn-primary col-2 mt-5 fw-bold">حفظ</button>
+    <div class="col-10"></div>
+    <a [routerLink]="goBackLink" class="d-inline-block col-2">العودة للقائمة</a>
+  </form>
+</div>

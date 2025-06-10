@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="text-primary fw-semibold" *ngIf="isAddRequest">جدول اذونات الاضافة للمخازن</h3>
+  <h3 class="text-primary fw-semibold" *ngIf="!isAddRequest">جدول اذونات الصرف من المخازن</h3>
+</div>
+<div class="mb-5">
+  <div class="row mb-4">
+    <div class="col-2">
+      <a
+        class="btn btn-primary w-100 fw-bold"
+        *ngIf="isAddRequest"
+        [routerLink]="[
+          '/',
+          appRoutes.stockItemsRequisition.base,
+          appRoutes.stockItemsRequisition.addItemsRequest
+        ]"
+      >
+        اضافة اذن
+      </a>
+      <a
+        class="btn btn-primary w-100 fw-bold"
+        [routerLink]="[
+          '/',
+          appRoutes.stockItemsRequisition.base,
+          appRoutes.stockItemsRequisition.issueItemsRequest
+        ]"
+        *ngIf="!isAddRequest"
+      >
+        اضافة اذن
+      </a>
+    </div>
+  </div>
+  <ag-grid-angular
+    [enableRtl]="true"
+    class="ag-theme-quartz"
+    style="width: 100%; height: 500px;"
+    [localeText]="localeText"
+    [gridOptions]="gridOpts"
+  ></ag-grid-angular>
+</div>

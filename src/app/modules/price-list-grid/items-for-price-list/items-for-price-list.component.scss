@@ -1,0 +1,28 @@
+.table-input {
+  outline: 0;
+  width: 100%;
+  border: 0;
+}
+
+/* More specific selector to ensure it overrides Bootstrap */
+select.form-select.no-arrow {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none; /* Remove any background images */
+  padding-right: 12px; /* Adjust padding to prevent text overlap */
+}
+
+/* For IE10+ */
+select.form-select.no-arrow::-ms-expand {
+  display: none;
+}
+
+/* For Firefox */
+@-moz-document url-prefix() {
+  select.form-select.no-arrow {
+    text-indent: 0.01px;
+    text-overflow: '';
+  }
+}
+

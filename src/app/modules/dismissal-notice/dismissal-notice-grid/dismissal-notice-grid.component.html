@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="text-primary fw-semibold">جدول اذونات التحويل بين المخازن</h3>
+</div>
+<div class="mb-5">
+  <div class="row mb-4">
+    <div class="col-2">
+      <a
+        class="btn btn-primary w-100 fw-bold"
+        [routerLink]="['/', appRoutes.dismissalNotice.base, appRoutes.dismissalNotice.create]"
+      >
+        اضافة اذن
+      </a>
+    </div>
+  </div>
+  <ag-grid-angular
+    [enableRtl]="true"
+    class="ag-theme-quartz"
+    style="width: 100%; height: 500px;"
+    [localeText]="localeText"
+    [gridOptions]="gridOpts"
+  ></ag-grid-angular>
+</div>

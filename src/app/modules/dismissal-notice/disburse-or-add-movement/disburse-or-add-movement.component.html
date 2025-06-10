@@ -1,0 +1,74 @@
+<div class="my-5">
+  <div class="d-flex justify-content-center text-primary mt-4">
+    <h2 class="fw-semibold">شاشة حركة الاضافة او الصرف</h2>
+  </div>
+  <form class="container " [formGroup]="disburseOrAddMovement">
+    <div class="row mt-2">
+      <div class="col-12 col-md-3">
+        <label for="code" class="col-form-label">
+          الكود
+        </label>
+        <input type="text" class="form-control" id="code" formControlName="code" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <label for="description" class="col-form-label">
+          الوصف
+        </label>
+        <input type="text" class="form-control" id="description" formControlName="description" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="transactionType" class="col-form-label">الحركة</label>
+        <select class=" form-select" id="transactionType" formControlName="transactionType">
+          <option [value]="movementType.disburse">حركة صرف</option>
+          <option [value]="movementType.add">حركة اضافة</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="isPosted" class="col-form-label">الترحيل</label>
+        <select class=" form-select" id="isPosted" formControlName="isPosted">
+          <option value="true">نعم</option>
+          <option value="false">لا</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-6">
+      <label for="debitAccount" class="col-form-label">حساب مدين</label>
+        <input type="text" class="form-control" id="debitAccount" formControlName="debitAccount" />
+      </div>
+      <div class="col-md-6">
+        <label for="creditAccount" class="col-form-label">حساب دائن</label>
+          <input type="text" class="form-control" id="creditAccount" formControlName="creditAccount" />
+      </div>
+    </div>
+
+    <!-- <div class="row mt-2">
+      <label for="creditAccount" class="col-form-label">حساب دائن</label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" id="creditAccount" formControlName="creditAccount" />
+      </div>
+      <div class="col-md-8">
+        <input type="text" class="form-control" id="creditAccount" formControlName="creditAccount" [disabled]="true"/>
+      </div>
+    </div> -->
+
+    <div class="row mt-2">
+      <label for="costCenter" class="col-form-label">مركز التكلفة</label>
+      <div class="col-md-12">
+        <input type="text" class="form-control" id="costCenter" formControlName="costCenter" />
+      </div>
+      <!-- <div class="col-md-8">
+        <input type="text" class="form-control" id="costCenter" formControlName="code" [disabled]="true"/>
+      </div> -->
+    </div>
+    <button *ngIf="isEdit" class="btn btn-primary col-2 mt-5 fw-semibold" (click)="saveEdit()">حفظ</button>
+    <button *ngIf="!isEdit" class="btn btn-primary col-2 mt-5 fw-semibold"
+      (click)="onSubmit()">اضافة</button>
+    <div class="col-10"></div>
+    <a [href]="gridLink" class="d-inline-block col-2">العودة للقائمة السابقة</a>
+  </form> 

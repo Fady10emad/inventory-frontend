@@ -1,0 +1,237 @@
+<div class="my-5">
+  <form class="container row" [formGroup]="itemsStockRequsitionForm">
+    <!-- <div class="col-md-8">
+      <label for="stroeFromMove" class="col-form-label">من مخزن</label>
+      <select
+        class="form-select"
+        id="stroeFromMove"
+        [formControl]="itemsStockRequsitionForm.controls.fromStoreId"
+      >
+        <option [value]="store.id" *ngFor="let store of stores">
+          [ {{ store.code }} ] - [ {{ store.description }} ] - [ {{ store.responsible }} ]
+        </option>
+      </select>
+    </div> -->
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="transactionID" class="col-form-label">نوع الحركة</label>
+          <!-- <input
+            type="text"
+            id="transactionID"
+            class="form-control"
+            [formControl]="itemsStockRequsitionForm.controls.c1"
+          /> -->
+          <select
+            class="form-select"
+            id="transactionID"
+            [formControl]="itemsStockRequsitionForm.controls.transactionID"
+          >
+            <option [value]="movment.id" *ngFor="let movment of movments">
+              {{ movment.description }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="code" class="col-form-label" *ngIf="isAddRequest">رقم اذن الاضافة</label>
+      <label for="code" class="col-form-label" *ngIf="!isAddRequest">رقم اذن الصرف</label>
+      <input
+        type="text"
+        id="code"
+        class="form-control"
+        [formControl]="itemsStockRequsitionForm.controls.code"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="fileNumber" class="col-form-label" *ngIf="isAddRequest">رقم ملف الاضافة</label>
+      <label for="fileNumber" class="col-form-label" *ngIf="!isAddRequest">رقم ملف الصرف</label>
+      <input
+        type="text"
+        id="fileNumber"
+        class="form-control"
+        [formControl]="itemsStockRequsitionForm.controls.fileNumber"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="date" class="col-form-label">التاريخ</label>
+      <input
+        type="date"
+        id="date"
+        class="form-control"
+        [formControl]="itemsStockRequsitionForm.controls.transactionPermissionsDate"
+      />
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-8">
+          <label for="storeID" class="col-form-label">المخزن</label>
+          <select
+            class="form-select"
+            id="storeID"
+            [formControl]="itemsStockRequsitionForm.controls.storeId"
+          >
+            <option [value]="store.id" *ngFor="let store of availableStoresOptions">
+              [ {{ store.code }} ] - [ {{ store.description }} ] - [ {{ store.responsible }} ]
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="agency" class="col-form-label">الجهه</label>
+      <input
+        type="text"
+        id="agency"
+        class="form-control"
+        [formControl]="itemsStockRequsitionForm.controls.agency"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="receiver" class="col-form-label">المستلم</label>
+      <input
+        type="text"
+        id="receiver"
+        class="form-control"
+        [formControl]="itemsStockRequsitionForm.controls.receiver"
+      />
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <div class="d-flex">
+        <button class="btn btn-primary" type="button" (click)="addItemRowWithItsListeners()">
+          اضافة صنف
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <table class="table table-hover table-bordered">
+        <thead *ngIf="itemsStockRequsitionForm.controls.transactionPermissionsDetails.length">
+          <tr>
+            <th scope="col">كود الصنف</th>
+            <th scope="col">الباركود</th>
+            <th scope="col">اسم الصنف</th>
+            <th scope="col">قطعة</th>
+            <th scope="col">عبوة</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of itemsStockRequsitionForm.controls.transactionPermissionsDetails.controls;
+              let i = index
+            "
+            [formGroup]="item"
+          >
+            <td>
+              <input type="text" class="form-control" [formControl]="item.controls.code" />
+            </td>
+            <td class="w-25">
+              <!-- <ng-select
+                [items]="availableItems"
+                bindLabel="barCode"
+                bindValue="id"
+                placeholder="اختر الصنف"
+                [formControl]="item.controls.barCodeId"
+                [clearable]="false"
+              ></ng-select> -->
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.barCode" /> -->
+              <ng-select
+                [items]="availableItems$ | async"
+                bindLabel="barCode"
+                bindValue="id"
+                placeholder="ابحث عن الصنف"
+                [formControl]="item.controls.barCodeId"
+                [typeahead]="itemSearchInput$"
+                typeToSearchText="ابحث عن الصنف"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td class="w-25">
+              <ng-select
+                [items]="availableItems$ | async"
+                bindLabel="descriptionAr"
+                bindValue="id"
+                placeholder="ابحث عن الصنف"
+                [formControl]="item.controls.itemID"
+                [typeahead]="itemSearchInput$"
+                typeToSearchText="ابحث عن الصنف"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.piece" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.package" />
+            </td>
+            <td class="d-flex justify-content-center align-items-center">
+              <button type="button" class="btn" (click)="removeItemRow(i)">
+                <i class="bi bi-trash3-fill text-danger fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Document number display -->
+    <div class="document-number-container mt-3">
+      <div class="d-flex align-items-center gap-3">
+        <h4 class="mb-0">رقم الفاتورة:</h4>
+        <ng-container *ngIf="purchaseInvoice && !showInvoiceDropdown; else chooseInvoice">
+          <span class="document-number">{{ purchaseInvoice.documentNo }}</span>
+          <!-- Edit button -->
+          <button class="btn btn-sm btn-outline-primary" (click)="showInvoiceDropdown = true">
+            <i class="fas fa-edit"></i>
+            تعديل
+          </button>
+          <!-- Link to invoice -->
+          <a [href]="getInvoiceLink()" class="btn btn-link">
+            <i class="fas fa-external-link-alt"></i>
+            عرض الفاتورة
+          </a>
+        </ng-container>
+        <ng-template #chooseInvoice>
+          <div class="col-md-2">
+            <div class="d-flex">
+            <select
+              class="form-select"
+              id="invoiceNumber"
+              [formControl]="itemsStockRequsitionForm.controls.invoiceNumber"
+            >
+              <option [ngValue]="null" disabled selected>اختر رقم الفاتورة</option>
+              <option *ngFor="let invoice of invoices" [ngValue]="invoice.id">
+                {{ invoice.documentNo }}
+              </option>
+            </select>
+            <button
+              class="btn btn-sm btn-secondary ms-2"
+              (click)="showInvoiceDropdown = false"
+              *ngIf="purchaseInvoice"
+            >
+              إلغاء
+            </button>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <button
+        class="btn btn-primary col-2 mt-5 fw-semibold"
+        (click)="isEdit ? editReqisition() : addNewReqisition()"
+      >
+        {{ isEdit ? 'حفظ' : 'اضافة' }}
+      </button>
+      <div class="col-10"></div>
+      <a class="d-inline-block col-2" [routerLink]="backLink">
+        العودة للقائمة
+      </a>
+    </div>
+  </form>
+</div>

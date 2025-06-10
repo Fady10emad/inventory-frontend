@@ -1,0 +1,150 @@
+<div class="my-5">
+  <form class="container row" [formGroup]="permissionToMoveItemsForm">
+    <div class="col-md-8">
+      <label for="stroeFromMove" class="col-form-label">من مخزن</label>
+      <select
+        class="form-select"
+        id="stroeFromMove"
+        [formControl]="permissionToMoveItemsForm.controls.fromStoreId"
+      >
+        <option [value]="store.id" *ngFor="let store of stores">
+          [ {{ store.code }} ] - [ {{ store.description }} ] - [ {{ store.responsible }} ]
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="location" class="col-form-label">رقم طلب الصرف</label>
+      <input
+        type="text"
+        id="location"
+        class="form-control"
+        [formControl]="permissionToMoveItemsForm.controls.exchangeOrderNumber"
+      />
+    </div>
+    <div class="col-md-8">
+      <label for="toStoreId" class="col-form-label">الى مخزن</label>
+      <select
+        class="form-select"
+        id="toStoreId"
+        [formControl]="permissionToMoveItemsForm.controls.toStoreId"
+      >
+        <option [value]="store.id" *ngFor="let store of stores">
+          [ {{ store.code }} ] - [ {{ store.description }} ] - [ {{ store.responsible }} ]
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="addOrderNumber" class="col-form-label">رقم طلب الاضافة</label>
+      <input
+        type="text"
+        id="addOrderNumber"
+        class="form-control"
+        [formControl]="permissionToMoveItemsForm.controls.additionRequestNumber"
+      />
+    </div>
+    <div class="col-md-12 mt-5">
+      <div class="d-flex">
+        <button class="btn btn-primary" type="button" (click)="addItemRow()">
+          اضافة صنف
+        </button>
+      </div>
+    </div>
+    <!-- <div class="col-md-12 mt-5">
+      <ng-container
+        *ngFor="let item of permissionToMoveItemsForm.controls.itemsToMove.controls"
+        formArrayName="itemsToMove"
+        [formGroup]="item"
+      >
+        <input type="text" [formControl]="item.controls.code" />
+      </ng-container>
+    </div> -->
+    <div class="col-md-12 mt-5">
+      <table class="table table-hover table-bordered">
+        <thead *ngIf="permissionToMoveItemsForm.controls.itemsToMove.length">
+          <tr>
+            <th scope="col">كود الصنف</th>
+            <th scope="col">الباركود</th>
+            <th scope="col">اسم الصنف</th>
+            <th scope="col">قطعة</th>
+            <th scope="col">عبوة</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of permissionToMoveItemsForm.controls.itemsToMove.controls;
+              let i = index
+            "
+            [formGroup]="item"
+          >
+            <td>
+              <input type="text" class="form-control" [formControl]="item.controls.code" />
+              <!-- <ng-select
+                [items]="availableItems"
+                bindLabel="code"
+                bindValue="id"
+                placeholder="اختر الصنف"
+                [formControl]="item.controls.codeId"
+                [clearable]="false"
+              ></ng-select> -->
+            </td>
+            <td>
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.barcode" /> -->
+              <ng-select
+                [items]="availableItems"
+                bindLabel="barCode"
+                bindValue="id"
+                placeholder="اختر الصنف"
+                [formControl]="item.controls.barCodeId"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td>
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.itemName" /> -->
+              <ng-select
+                [items]="availableItems"
+                bindLabel="itemName"
+                bindValue="id"
+                placeholder="اختر الصنف"
+                [formControl]="item.controls.itemNameId"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [formControl]="item.controls.currentAvailableBalance"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [formControl]="item.controls.currentAvailableBalancePackage"
+              />
+            </td>
+            <td class="d-flex justify-content-center align-items-center">
+              <button class="btn" (click)="removeItemRow(i)">
+                <i class="bi bi-trash3-fill text-danger fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12 mt-5">
+      <button *ngIf="isEdit" class="btn btn-primary col-2 mt-5 fw-semibold" (click)="saveEdit()">حفظ</button>
+      <button *ngIf="!isEdit" class="btn btn-primary col-2 mt-5 fw-semibold"
+        (click)="addDismissalNotice()">اضافة</button>
+      <div class="col-10"></div>
+      <a
+        [routerLink]="['/', appRoutes.dismissalNotice.base, appRoutes.dismissalNotice.grid]"
+        class="d-inline-block col-2"
+      >
+        العودة للقائمة
+      </a>
+    </div>
+  </form>
+</div>

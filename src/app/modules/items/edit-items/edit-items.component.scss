@@ -1,0 +1,37 @@
+.table-input {
+  outline: 0;
+  width: 100%;
+  border: 0;
+}
+
+.nav-link.active{
+  background-color: #008CBA;
+  color: white;
+}
+
+/* Equal width columns for all tables */
+.table-fixed {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Make sure all cells have equal width */
+.table-fixed th, 
+.table-fixed td {
+  width: 1%; /* This makes columns equal width */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+/* For the first table with 10 columns */
+.table-fixed-10 th,
+.table-fixed-10 td {
+  width: 10%; /* 100% / 10 columns */
+}
+
+/* For the second table with 3 columns */
+.table-fixed-3 th,
+.table-fixed-3 td {
+  width: 33.33%; /* 100% / 3 columns */
+}

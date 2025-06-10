@@ -1,0 +1,298 @@
+<div class="my-5">
+  <form class="container row" (ngSubmit)="editItem()" [formGroup]="editItemForm">
+    <div class="col-md-4">
+      <label for="categoryId" class="col-form-label">المجموعة الفرعية</label>
+      <select class="form-select" id="categoryId" formControlName="categoryId">
+        <option [value]="null">اختر مجموعة فرعية</option>
+        <option [value]="subCategory.id" *ngFor="let subCategory of subsCategories">
+          {{ subCategory.name_AR }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="code" class="col-form-label">كود الصنف</label>
+      <input type="text" id="code" class="form-control" formControlName="code" />
+    </div>
+
+    <div class="col-md-4">
+      <label for="barCode" class="col-form-label">الباركود</label>
+      <input type="text" id="barCode" class="form-control" formControlName="barCode" />
+    </div>
+
+    <div class="col-md-12">
+      <label for="descriptionAr" class="col-form-label">
+        وصف الصنف عربي
+      </label>
+      <input type="text" class="form-control" id="descriptionAr" formControlName="descriptionAr" />
+    </div>
+
+    <div class="col-md-12">
+      <label for="descriptionEn" class="col-form-label">
+        وصف الصنف انجليزي
+      </label>
+      <input type="text" class="form-control" id="descriptionEn" formControlName="descriptionEn" />
+    </div>
+
+    <div class="col-md-4">
+      <label for="shortDescription" class="col-form-label">
+        الوصف المختصر
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="shortDescription"
+        formControlName="shortDescription"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="brandDescription" class="col-form-label">توصيف الماركة</label>
+      <input
+        type="text"
+        class="form-control"
+        id="brandDescription"
+        formControlName="brandDescription"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="originCountry" class="col-form-label">
+        بلد المنشأ
+      </label>
+      <input type="text" class="form-control" id="originCountry" formControlName="originCountry" />
+    </div>
+
+    <!-- <div class="col-md-8"> -->
+    <!-- TODO: change form control and binding data -->
+    <!-- <label for="______" class="col-form-label">المورد</label> -->
+    <!-- <select class=" form-select" id="______" formControlName="______"> -->
+    <!-- <option [value]="null">اختر مورد</option> -->
+    <!-- <option [value]="1">مورد 1</option> -->
+    <!-- <option [value]="exporter.id" *ngFor="let exporter of [{ id: 0, name_AR: 'مورد 1' }]">
+          {{ exporter.name_AR }}
+        </option> -->
+    <!-- </select> -->
+    <!-- </div> -->
+
+    <!-- <div class="col-md-4">
+      <div class="col-md-12">
+        <label for="price" class="col-form-label">السعر</label>
+        <input type="number" class="form-control" id="price" formControlName="price" />
+      </div>
+    </div> -->
+
+    <div class="col-md-4">
+      <label for="measruingUnit" class="col-form-label">وحدة القياس</label>
+      <input type="text" class="form-control" id="measruingUnit" formControlName="measruingUnit" />
+    </div>
+    <div class="col-md-4">
+      <label for="packageCapacity" class="col-form-label">سعة العبوة</label>
+      <input
+        type="text"
+        class="form-control"
+        id="packageCapacity"
+        formControlName="packageCapacity"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="unitWeight" class="col-form-label">وزن الوحدة</label>
+      <input type="text" class="form-control" id="unitWeight" formControlName="unitWeight" />
+    </div>
+
+    <div class="col-md-4">
+      <label for="discount" class="col-form-label">الخصم</label>
+      <select class=" form-select" id="discount" formControlName="discount">
+        <option [value]="discount.Yes">نعم</option>
+        <option [value]="discount.No">لا</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="discountType" class="col-form-label">نوع الخصم</label>
+      <select class=" form-select" id="discountType" formControlName="discountType">
+        <option [value]="discountType.noType">اختر نوع الخصم</option>
+        <option [value]="discountType.value">قيمة</option>
+        <option [value]="discountType.percentage">نسبة</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="transactionClose" class="col-form-label">اقفال التعامل</label>
+      <select class=" form-select" id="transactionClose" formControlName="transactionClose">
+        <option [value]="transactionClose.Yes">نعم</option>
+        <option [value]="transactionClose.No">لا</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="purchaseTax" class="col-form-label">ض.منبع شراء</label>
+      <select class="form-select" id="purchaseTax" formControlName="purchaseTax">
+        <option [value]="purchaseTaxEnum.Yes">نعم</option>
+        <option [value]="purchaseTaxEnum.No">لا</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="valueAddedTaxPurchase" class="col-form-label">
+        ضريبة القيمة المضافة مع الشراء
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="valueAddedTaxPurchase"
+        formControlName="valueAddedTaxPurchase"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label for="saleTax" class="col-form-label">ض.منبع بيع</label>
+      <select class="form-select" id="saleTax" formControlName="saleTax">
+        <option [value]="saleTaxEnum.Yes">نعم</option>
+        <option [value]="saleTaxEnum.No">لا</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="valueAddedTaxSales" class="col-form-label">
+        ضريبة القيمة المضافة مع البيع
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="valueAddedTaxSales"
+        formControlName="valueAddedTaxSales"
+      />
+    </div>
+
+    <div class="mt-4">
+      <h4>تكلفة الصنف</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="lastPurchasePrice" class="col-form-label">أخر سعر شراء</label>
+          <input
+            type="number"
+            id="lastPurchasePrice"
+            class="form-control"
+            formControlName="lastPurchasePrice"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="currentAverageCost" class="col-form-label">متوسط تكلفة حالي</label>
+          <input
+            type="number"
+            id="currentAverageCost"
+            class="form-control"
+            formControlName="currentAverageCost"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="averageCostOftheBeginningterm" class="col-form-label">
+            متوسط تكلفة أول المدة
+          </label>
+          <input
+            type="number"
+            id="averageCostOftheBeginningterm"
+            class="form-control"
+            formControlName="averageCostOftheBeginningterm"
+          />
+        </div>
+      </div>
+    </div>
+
+    <nav ngbNav #nav="ngbNav" class="nav-tabs mt-5" [(activeId)]="active" [destroyOnHide]="false">
+      <ng-container [ngbNavItem]="1">
+        <a ngbNavLink>قائمة المخازن</a>
+        <ng-template ngbNavContent>
+          <table class="table table-hover table-bordered table-fixed table-fixed-10">
+            <thead>
+              <tr>
+                <th scope="col" [colSpan]="2"></th>
+                <th scope="col" [colSpan]="2">رصيد حالي متاح</th>
+                <th scope="col" [colSpan]="2">رصيد اول المدة</th>
+                <th scope="col" [colSpan]="2">حد أدنى </th>
+                <th scope="col" [colSpan]="2">حد الطلب</th>
+              </tr>
+              <tr>
+                <th scope="col">كود المخزن</th>
+                <th scope="col">وصف المخزن</th>
+                <th scope="col">قطعة</th>
+                <th scope="col">عبوة</th>
+                <th scope="col">قطعة</th>
+                <th scope="col">عبوة</th>
+                <th scope="col">قطعة</th>
+                <th scope="col">عبوة</th>
+                <th scope="col">قطعة</th>
+                <th scope="col">عبوة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="priceListArray">
+                <tr
+                  *ngFor="let itemForStore of storesFormArray.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <th scope="row">{{ itemForStore.value.id }}</th>
+                  <td>{{ itemForStore.value.storeDescription }}</td>
+                  <td>{{ itemForStore.value.currentAvailableBalancePiece }}</td>
+                  <td>{{ itemForStore.value.currentAvailableBalancePackage }}</td>
+                  <td>{{ itemForStore.value.balanceFirstPeriodPiece }}</td>
+                  <td>{{ itemForStore.value.balanceFirstPeriodPackage }}</td>
+                  <td>
+                    <input type="number" class="form-control" formControlName="minimumPiece"  (blur)="onStockInputBlur(itemForStore)"  (blur)="onStockInputChange(itemForStore, 'minimumPiece', $event)"
+                    value= "{{ itemForStore.value.minimumPiece }}">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" formControlName="minimumPackage" (blur)="onStockInputBlur(itemForStore)"   (blur)="onStockInputChange(itemForStore, 'minimumPackage', $event)"
+                    value= "{{ itemForStore.value.minimumPackage }}">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" formControlName="reservedQuantityPiece" (blur)="onStockInputBlur(itemForStore)"   (blur)="onStockInputChange(itemForStore, 'reservedQuantityPiece', $event)"
+                    value= "{{ itemForStore.value.reservedQuantityPiece }}">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" formControlName="reservedQuantityPackage" (blur)="onStockInputBlur(itemForStore)"   (blur)="onStockInputChange(itemForStore, 'reservedQuantityPackage', $event)"
+                    value= "{{ itemForStore.value.reservedQuantityPackage }}">
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-template>
+      </ng-container>
+      <ng-container [ngbNavItem]="2">
+        <button ngbNavLink>قائمة الأسعار</button>
+        <ng-template ngbNavContent>
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">كود التسعير</th>
+                <th scope="col">وصف التسعير</th>
+                <!-- <th scope="col">وصف الصنف</th> -->
+                <th scope="col">سعر البيع</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="priceListArray">
+                <tr
+                  *ngFor="let listItem of priceListFormArray.controls; let i = index"
+                  [formGroupName]="i"
+                >
+                  <th scope="row">{{ listItem.value.id }}</th>
+                  <td>{{ listItem.value.priceListDescription }}</td>
+                  <!-- <td>{{ editItemForm.value.descriptionAr }}</td> -->
+                  <td>
+                    <input type="number" class="table-input" formControlName="price" />
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-template>
+      </ng-container>
+    </nav>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+    <button class="btn btn-primary col-2 mt-5 fw-semibold">حفظ</button>
+    <div class="col-10"></div>
+    <a [routerLink]="['/items/grid']" class="d-inline-block col-2">العودة للقائمة</a>
+  </form>
+</div>

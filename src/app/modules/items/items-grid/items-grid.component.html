@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="text-primary fw-semibold">جدول الاصناف</h3>
+</div>
+
+<div class="mb-5">
+  <div class="row mb-4">
+    <div class="col-2">
+      <a class="btn btn-primary w-100 fw-bold" [routerLink]="['/items', 'create']">
+        اضافة صنف
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="اسم المجموعة"
+          [(ngModel)]="itemsFilters.categoryNameSearch"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="كود المجموعة"
+          [(ngModel)]="itemsFilters.categoryCodeSearch"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="باركود الصنف"
+          [(ngModel)]="itemsFilters.barcodeSearch"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="اسم الصنف"
+          [(ngModel)]="itemsFilters.itemNameSearch"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="d-flex my-4">
+    <input
+      type="button"
+      class="btn btn-primary px-4 py-2 me-auto"
+      value="بحث"
+      (click)="searchItems()"
+    />
+  </div>
+  <ag-grid-angular
+    [enableRtl]="true"
+    class="ag-theme-quartz"
+    style="width: 100%; height: 500px;"
+    [localeText]="localeText"
+    [gridOptions]="gridOpts"
+  ></ag-grid-angular>
+</div>

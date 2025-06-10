@@ -1,0 +1,105 @@
+<div class="my-3">
+  <form class="container" (ngSubmit)="savePageChanges()" [formGroup]="priceListForm">
+    <div class="p-0 my-2 row">
+      <div class="col-md-4">
+        <label for="code" class="col-form-label">كود القائمة</label>
+        <input type="text" id="code" class="form-control" formControlName="code" />
+      </div>
+      <div class="col-md-4">
+        <label for="description" class="col-form-label">وصف القائمة</label>
+        <input type="text" id="description" class="form-control" formControlName="description" />
+      </div>
+      <div class="col-md-4">
+        <label for="profitabilityRatio" class="col-form-label">نسبة الربح</label>
+        <input
+          type="text"
+          id="profitabilityRatio"
+          class="form-control"
+          formControlName="profitabilityRatio"
+        />
+      </div>
+    </div>
+    <div class="p-0 my-3 row align-items-end">
+      <div class="col-md-4">
+        <label for="categoryId" class="col-form-label">المجموعة الفرعية</label>
+        <div class="input-group">
+          <select #categorySelect class="form-select no-arrow" id="categoryId" formControlName="categoryId">
+            <option [value]="''">اختر مجموعة فرعية</option>
+            <option [value]="subCategory.id" *ngFor="let subCategory of subsCategories">
+              {{ subCategory.name_AR }}
+            </option>
+          </select>
+          <span class="btn btn-primary">
+            <i class="bi bi-search"></i>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            formControlName="itemSearch"
+            placeholder="ابحث باسم الصنف"
+            (keyup)="onSearch()"
+          />
+          <button type="button" class="btn btn-primary" (click)="onSearch()">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+      <div class="ms-auto w-25">
+        <select
+          class="form-select w-25 ms-auto"
+          id="pageSizeSelect"
+          formControlName="pageSizeSelect"
+        >
+          <option *ngFor="let pageSize of pageSizes" [value]="pageSize">
+            {{ pageSize }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">كودالصنف</th>
+          <th scope="col">وصف الصنف</th>
+          <th scope="col">سعر البيع</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container formArrayName="priceListArray">
+          <tr
+            *ngFor="let listItem of priceListFormArray.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <th scope="row">{{ listItem.value.id }}</th>
+            <th scope="row">{{ listItem.value.itemName }}</th>
+            <td>
+              <input
+                type="number"
+                class="table-input"
+                formControlName="price"
+                (input)="acceptNumbersOnly($event, 'price', i)"
+              />
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <app-custom-pagination
+        [currentPage]="currentPage"
+        [totalRecords]="totalRecords"
+        [pageSize]="pageSize"
+        (pageChange)="onPageChange($event)"
+      ></app-custom-pagination>
+    </div>
+
+    <button class="btn btn-primary col-2 mt-5 fw-bold">حفظ</button>
+    <div class="col-10"></div>
+    <a [routerLink]="priceListGridLink" class="d-inline-block col-2">العودة للقائمة</a>
+  </form>
+</div>

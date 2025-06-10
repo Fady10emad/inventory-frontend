@@ -1,0 +1,76 @@
+<div class="my-5">
+  <form class="container row" (ngSubmit)="addNewCategory()" [formGroup]="createCategoryForm">
+    <div class="col-md-6">
+      <label for="code" class="col-form-label">كود المجموعة:</label>
+      <input type="string" id="code" class="form-control" formControlName="code" />
+    </div>
+    <div class="w-100"></div>
+    <div class="col-md-6">
+      <label for="nameAr" class="col-form-label">الاسم العربي:</label>
+      <input type="string" id="nameAr" class="form-control" formControlName="name_AR" />
+    </div>
+    <div class="col-md-6">
+      <label for="nameEn" class="col-form-label">الاسم الانجليزي:</label>
+      <input type="string" id="nameEn" class="form-control" formControlName="name_EN" />
+    </div>
+    <div class="col-md-6">
+      <label for="categoryTypeId" class="col-form-label">نوع المجموعة:</label>
+      <select class="form-select" id="categoryTypeId" formControlName="categoryTypeId">
+        <option [value]="categoryType.Main">
+          رئيسية
+        </option>
+        <option [value]="categoryType.SubMain">
+          فرعية
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="parentCategoryId" class="col-form-label">المجموعة الرئيسية:</label>
+      <select class="form-select" id="parentCategoryId" formControlName="parentCategoryId">
+        <option [value]="null">اختار مجموعة رئيسية</option>
+        <option [value]="parentCategory.id" *ngFor="let parentCategory of parentsCategories">
+          {{ parentCategory.name_AR }}
+        </option>
+      </select>
+    </div>
+    <!-- <div class="row mb-2">
+      <label for="nameAr" class="col-sm-2 col-form-label">الاسم العربي:</label>
+      <div class="col-sm-4 mt-2">
+        <input type="string" id="nameAr" class="form-control" formControlName="name_AR" />
+      </div>
+    </div> -->
+    <!-- <div class="row mb-2">
+      <label for="nameEn" class="col-sm-2 col-form-label">الاسم اللاتيني:</label>
+      <div class="col-sm-4 mt-2">
+        <input type="string" id="nameEn" class="form-control" formControlName="name_EN" />
+      </div>
+    </div> -->
+    <!-- <div class="row mb-2">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">نوع المجموعة:</label>
+      <div class="col-sm-4 mt-2">
+        <ng-select
+          [items]="categoryType"
+          formControlName="categoryTypeId"
+          bindLabel="name_AR"
+          bindValue="id"
+          [clearable]="false"
+        ></ng-select>
+        
+      </div>
+    </div> -->
+    <!-- <div class="row mb-2">
+      <label for="parentCategoryId" class="col-sm-2 col-form-label">المجموعة الرئيسية:</label>
+      <div class="col-sm-4 mt-2">
+        <ng-select
+          [items]="parentsCategories"
+          formControlName="parentCategoryId"
+          bindLabel="name_AR"
+          bindValue="id"
+        ></ng-select>
+      </div>
+    </div> -->
+    <button class="btn btn-primary col-2 mt-5 fw-semibold">اضافة</button>
+    <div class="col-10"></div>
+    <a [routerLink]="['/categories/grid']" class="d-inline-block col-2">العودة للقائمة</a>
+  </form>
+</div>

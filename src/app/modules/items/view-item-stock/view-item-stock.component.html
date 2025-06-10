@@ -1,0 +1,119 @@
+<!-- <div class="my-5">
+  <div class="header mb-2">
+    <h4>
+      رصيد الصنف بالمخازن
+    </h4>
+  </div>  -->
+ <form [formGroup]="storageForm" class="my-2"> 
+    <!-- <div class="row">
+      <div class="col-6">
+        <label for="storageId" class="col-form-label">اختار مخزن</label>
+        <select class=" form-select" id="storageId" formControlName="storageId">
+          <option [value]="0">الكل</option>
+          <option *ngFor="let storage of storages" [value]="storage.id">{{ storage.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="my-2">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" [colSpan]="2">رصيد اول المده</th>
+            <th scope="col" [colSpan]="2">رصيد حالى متاح</th>
+            <th scope="col" [colSpan]="2">كمية محجوزه</th>
+            <th scope="col" [colSpan]="2">حد أدنى</th>
+            <th scope="col" [colSpan]="2">حد الطلب</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <td>قطعة</td>
+            <td>عبوة</td>
+
+            <td>قطعة</td>
+            <td>عبوة</td>
+
+            <td>قطعة</td>
+            <td>عبوة</td>
+
+            <td>قطعة</td>
+            <td>عبوة</td>
+
+            <td>قطعة</td>
+            <td>عبوة</td>
+          </tr>
+          <tr>
+            <td>{{ stock.openinngStock.piece }}</td>
+            <td>{{ stock.openinngStock.package }}</td>
+
+            <td>{{ stock.openinngStock.piece }}</td>
+            <td>{{ stock.openinngStock.package }}</td>
+
+            <td>{{ stock.openinngStock.piece }}</td>
+            <td>{{ stock.openinngStock.package }}</td>
+
+            <td>{{ stock.openinngStock.piece }}</td>
+            <td>{{ stock.openinngStock.package }}</td>
+
+            <td>{{ stock.openinngStock.piece }}</td>
+            <td>{{ stock.openinngStock.package }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="lastAddDate" class="col-form-label">أخر تاريخ اضافة</label>
+        <input type="date" id="lastAddDate" class="form-control" formControlName="lastAddDate" />
+      </div>
+      <div class="col-md-4">
+        <label for="lastExchangeDate" class="col-form-label">تاريخ اخر صرف</label>
+        <input
+          type="date"
+          id="lastExchangeDate"
+          class="form-control"
+          formControlName="lastExchangeDate"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="LastSupplierTransaction" class="col-form-label">
+          أخر تعامل مورد
+        </label>
+        <input
+          type="date"
+          id="LastSupplierTransaction"
+          class="form-control"
+          formControlName="LastSupplierTransaction"
+        />
+      </div>
+    </div>  -->
+    <div class="mt-4">
+    <h4>تكلفة الصنف</h4>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="lastPurchasePrice" class="col-form-label">أخر سعر شراء</label>
+        <input type="number" id="lastPurchasePrice" class="form-control" formControlName="lastPurchasePrice" />
+      </div>
+      <div class="col-md-4">
+        <label for="currentAverageCost" class="col-form-label">متوسط تكلفة حالي</label>
+        <input
+          type="number"
+          id="currentAverageCost"
+          class="form-control"
+          formControlName="currentAverageCost"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="averageCostOftheBeginningterm" class="col-form-label">متوسط تكلفة أول المدة</label>
+        <input
+          type="number"
+          id="averageCostOftheBeginningterm"
+          class="form-control"
+          formControlName="averageCostOftheBeginningterm"
+        />
+      </div>
+    </div>
+
+    </div>
+  </form>
+<!-- </div> -->

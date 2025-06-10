@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="text-primary fw-semibold">جدول المجموعات</h3>
+</div>
+<div class="my-5">
+  <div class="row mb-4">
+    <div class="col-2">
+      <a class="btn btn-primary w-100 fw-semibold fw-bold" [routerLink]="createCategoryLink">
+        اضافة مجموعة
+      </a>
+    </div>
+  </div>
+  <ejs-treegrid
+    [dataSource]="rowSourceData"
+    [enableRtl]="true"
+    [locale]="locale"
+    [treeColumnIndex]="1"
+    idMapping="id"
+    parentIdMapping="parentCategoryId"
+  >
+    <e-columns>
+      <e-column field="code" headerText="كود" width="160"></e-column>
+      <e-column field="name_AR" headerText="الاسم العربي"></e-column>
+      <e-column field="name_EN" headerText="الاسم اللاتيني"></e-column>
+      <e-column field="categoryTypeId" headerText="نوع المجموعة" width="150">
+        <ng-template #template let-data>
+          <span>
+            {{ +data.categoryTypeId === 1 ? 'رئيسي' : 'فرعي' }}
+          </span>
+        </ng-template>
+      </e-column>
+      <e-column headerText="تعديل" width="100">
+        <ng-template #template let-data>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn" (click)="editCategory(data.id)">
+              <i class="bi bi-pencil-square text-primary fs-4"></i>
+            </button>
+            <!-- <button class="btn" (click)="deleteCategory(data.id)">
+              <i class="bi bi-trash3-fill text-danger fs-4"></i>
+            </button> -->
+          </div>
+        </ng-template>
+      </e-column>
+      <e-column headerText="حذف" width="100">
+        <ng-template #template let-data>
+          <div class="d-flex align-items-center gap-2">
+            <!-- <button class="btn" (click)="editCategory(data.id)">
+              <i class="bi bi-pencil-square text-primary fs-4"></i>
+            </button> -->
+            <button class="btn" (click)="deleteCategory(data.id)">
+              <i class="bi bi-trash3-fill text-danger fs-4"></i>
+            </button>
+          </div>
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-treegrid>
+</div>

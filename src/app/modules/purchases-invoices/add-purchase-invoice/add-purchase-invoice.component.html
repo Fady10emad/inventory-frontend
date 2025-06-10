@@ -1,0 +1,342 @@
+<div class="my-5">
+  <div class="d-flex justify-content-center text-primary mt-4 mb-3">
+    <h2 class="fw-semibold">شاشة ادخال فاتورة المشتريات</h2>
+  </div>
+  <form class="container " [formGroup]="purchasesInvoiceForm">
+    <div class="row mt-2">
+      <div class="col-12 col-md-4">
+        <label for="documentNo" class="col-form-label">
+          رقم المستند
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="documentNo"
+          [formControl]="purchasesInvoiceForm.controls.documentNo"
+        />
+      </div>
+      <div class="col-12 col-md-4">
+        <label for="providerInvoiceNo" class="col-form-label">
+          رقم فاتورة المورد
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          id="providerInvoiceNo"
+          [formControl]="purchasesInvoiceForm.controls.providerInvoiceNo"
+        />
+      </div>
+      <div class="col-12 col-md-4">
+        <label for="invoiceDate" class="col-form-label">
+          التاريخ
+        </label>
+        <input
+          type="date"
+          class="form-control"
+          id="invoiceDate"
+          [formControl]="purchasesInvoiceForm.controls.invoiceDate"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 col-md-12">
+        <label for="documentNo" class="col-form-label">
+          المورد
+        </label>
+        <!-- <input type="text" class="form-control" id="documentNo" [formControl]="purchasesInvoiceForm.controls.providesId" /> -->
+        <ng-select
+          [items]="providers"
+          bindLabel="descriptionAr"
+          bindValue="id"
+          placeholder="اختر المورد"
+          [formControl]="purchasesInvoiceForm.controls.providesId"
+          [clearable]="false"
+        ></ng-select>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="transactionType" class="col-form-label">رقم امر التوريد</label>
+        <input
+          type="number"
+          class="form-control"
+          id="documentNo"
+          [formControl]="purchasesInvoiceForm.controls.supplyOrderNo"
+        />
+      </div>
+      <!-- <div class="col-md-6">
+        <label for="isPosted" class="col-form-label">المخزن</label>
+
+        <ng-select
+        [items]="stores"
+        bindLabel="code"
+        bindValue="id"
+        placeholder="اختر المخزن"
+        [formControl]="purchasesInvoiceForm.controls.store"
+        [clearable]="false"
+      ></ng-select>
+      </div>-->
+      <div class="col-md-6">
+        <label for="paymentMethod" class="col-form-label">الدفع</label>
+        <select
+          class=" form-select"
+          id="paymentMethod"
+          [formControl]="purchasesInvoiceForm.controls.paymentMethod"
+        >
+          <option [value]="PaymentMethod.cash">نقدا</option>
+          <option [value]="PaymentMethod.later">اجل</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <!-- <div class="col-md-6">
+      <label for="paymentMethod" class="col-form-label">الدفع</label>
+      <select class=" form-select" id="paymentMethod" [formControl]="purchasesInvoiceForm.controls.paymentMethod">
+        <option [value]="PaymentMethod.cash">نقدا</option>
+        <option [value]="PaymentMethod.later">اجل</option>
+      </select>      </div> -->
+      <div class="col-md-12">
+        <label for="notes" class="col-form-label">ملاحظات</label>
+        <input
+          type="text"
+          class="form-control"
+          id="notes"
+          [formControl]="purchasesInvoiceForm.controls.notes"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12 mt-5">
+      <h3 class="text-primary fw-semibold">جدول الاصناف</h3>
+      <div class="col-md-12 mt-3 mb-2">
+        <div class="d-flex">
+          <button class="btn btn-primary" type="button" (click)="addPurchasesInvoiceItemRow()">
+            اضافة صنف
+          </button>
+        </div>
+      </div>
+
+      <table class="table table-hover table-bordered">
+        <!-- <thead *ngIf="purchasesInvoiceForm.controls.purchasesInvoiceItems.length"> -->
+        <thead>
+          <tr>
+            <th style="min-width: 170px;" scope="col">المخزن</th>
+            <th style="min-width: 170px;" scope="col">كود الصنف</th>
+            <th style="min-width: 170px;" scope="col">الباركود</th>
+            <th style="min-width: 170px;" scope="col">وصف الصنف</th>
+            <th scope="col">كمية مطلوبة</th>
+            <th scope="col">كمية متاحة</th>
+            <th scope="col">سعر</th>
+            <th scope="col">% خصم</th>
+            <th scope="col">قيمة</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of purchasesInvoiceForm.controls.purchasesInvoiceItems.controls;
+              let i = index
+            "
+            [formGroup]="item"
+          >
+          <td style="min-width: 210px;">
+              <ng-select
+                [items]="stores"
+                bindLabel="displayLabel"
+                bindValue="id"
+                placeholder="اختر المخزن"
+                [formControl]="item.controls.storeId"
+                [clearable]="false"
+                (change)="getAvailableItemsByStoreId(item.controls.storeId.value)"
+              ></ng-select>
+            </td>
+            <td>
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.barcode" /> -->
+              <ng-select
+                [items]="availableItems"
+                bindLabel="code"
+                bindValue="id"
+                placeholder="اختر كود الصنف"
+                [formControl]="item.controls.itemId"
+                [clearable]="false"
+                (change)="getAvailableItemsByStoreIdData(item.controls.itemId.value, i)"
+              ></ng-select>
+            </td>
+            <td>
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.barcode" /> -->
+              <ng-select
+                [items]="selectedItem"
+                bindLabel="barCode"
+                bindValue="id"
+                [formControl]="item.controls.itemId"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td>
+              <!-- <input type="text" class="form-control" [formControl]="item.controls.itemName" /> -->
+              <ng-select
+                [items]="selectedItem"
+                bindLabel="itemName"
+                bindValue="id"
+                placeholder="اختر وصف الصنف"
+                [formControl]="item.controls.itemId"
+                [clearable]="false"
+              ></ng-select>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [formControl]="item.controls.requiredQuantity"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [formControl]="item.controls.quantityAvailable"
+              />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.price" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.discount" />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                [formControl]="item.controls.value"
+                readonly
+              />
+            </td>
+            <td class="d-flex justify-content-center align-items-center">
+              <button class="btn" (click)="removePurchasesInvoiceItemRow(i)">
+                <i class="bi bi-trash3-fill text-danger fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- -------------------  جدول الخدمات  ---------------- -->
+
+    <div class="col-md-12 mt-5">
+      <h3 class="text-primary fw-semibold">جدول الخدمات</h3>
+      <div class="col-md-12 mt-3 mb-2">
+        <div class="d-flex">
+          <button class="btn btn-primary" type="button" (click)="addPurchasesInvoiceServicesRow()">
+            اضافة حساب
+          </button>
+        </div>
+      </div>
+      <table class="table table-hover table-bordered">
+        <!-- <thead *ngIf="purchasesInvoiceForm.controls.purchasesInvoiceServices.length"> -->
+        <thead>
+          <tr>
+            <th style="min-width: 170px;" scope="col">كود الحساب</th>
+            <th style="min-width: 170px;" scope="col">الوصف</th>
+            <th scope="col">عدد</th>
+            <th scope="col">سعر</th>
+            <th scope="col">% خصم</th>
+            <th scope="col">قيمة</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of purchasesInvoiceForm.controls.purchasesInvoiceServices.controls;
+              let i = index
+            "
+            [formGroup]="item"
+          >
+            <td>
+              <input type="text" class="form-control" [formControl]="item.controls.bankCode" />
+            </td>
+            <td>
+              <input type="text" class="form-control" [formControl]="item.controls.description" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.amount" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.price" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.discount" />
+            </td>
+            <td>
+              <input type="number" class="form-control" [formControl]="item.controls.value" />
+            </td>
+            <td class="d-flex justify-content-center align-items-center">
+              <button class="btn" (click)="removePurchasesInvoiceServicesRow(i)">
+                <i class="bi bi-trash3-fill text-danger fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+      <!-- -------------------  اذونات الاضافة  ---------------- -->
+<div class="col-md-12 mt-5" *ngIf="isEdit && transactionPermissions.length">
+  <h3 class="text-primary fw-semibold">اذونات الاضافة</h3>
+
+
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th style="min-width: 120px;" scope="col">رقم الاذن</th>
+        <th style="min-width: 120px;" scope="col">التاريخ</th>
+        <th style="min-width: 120px;" scope="col">نوع المعاملة</th>
+        <th style="min-width: 120px;" scope="col">المخزن</th>
+        <th style="min-width: 170px;" scope="col">الجهه</th>
+        <th style="min-width: 120px;" scope="col">المستلم</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let permission of transactionPermissions; let i = index">
+        <td>{{permission.code}}</td>
+        <td>{{permission.transactionPermissionsDate | date: 'yyyy-MM-dd'}}</td>
+        <td>{{permission.transactionType === 1 ? 'صرف' : 'اضافة'}}</td>
+        <td>
+        <span *ngIf="permission.storeId">
+         {{ storeDisplayCache[permission.storeId] || '--' }}
+        </span>
+        <span *ngIf="!permission.storeId">--</span>
+        </td>
+        <td>{{permission.agency}}</td>
+        <td>{{permission.receiver || '--'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    <!-- Total Section -->
+    <div class="row mt-4">
+      <div class="col-md-6 offset-md-6">
+        <div class="d-flex justify-content-between border-top border-primary pt-2">
+          <h4 class="fw-semibold">الإجمالي:</h4>
+          <h4 class="fw-semibold">{{ calculateTotal() | number:'1.2-2' }}</h4>
+        </div>
+      </div>
+    </div>
+    <button *ngIf="isEdit" class="btn btn-primary col-2 mt-5 fw-semibold" (click)="saveEdit()">
+      حفظ
+    </button>
+    <button
+      *ngIf="!isEdit"
+      class="btn btn-primary col-2 mt-5 fw-semibold"
+      (click)="showConfirmationModal()"
+    >
+      اضافة
+    </button>
+    <div class="col-10"></div>
+    <a [href]="gridLink" class="d-inline-block col-2">العودة للقائمة السابقة</a>
+  </form>
+</div>
+

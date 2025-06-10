@@ -1,0 +1,245 @@
+<div class="my-5">
+  <form class="container " [formGroup]="vendorForm">
+    <!-- <form class="container "  [formGroup]="vendorForm"> -->
+
+    <div class="row mt-2">
+      <div class="col-md-4">
+        <label for="descriptionAr" class="col-form-label">
+          كود المورد
+        </label>
+        <input type="text" class="form-control" id="code" formControlName="code" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="descriptionAr" class="col-form-label">
+          الاسم العربي
+        </label>
+        <input type="text" class="form-control" id="descriptionAr" formControlName="descriptionAr" />
+      </div>
+      <div class="col-md-6">
+        <label for="name" class="col-form-label">
+          الاسم الانجليزي
+        </label>
+        <input type="text" class="form-control" id="name" formControlName="name" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-3 ">
+        <label for="providerCategoryId" class="col-form-label">المجموعة</label>
+        <div class="d-flex flex-row ">
+          <select class="form-select" id="providerCategoryId" formControlName="providerCategoryId">
+            <option [value]="null">اختر مجموعة</option>
+            <option [value]="category.id" *ngFor="let category of ProviderCategory">
+              {{ category.nameAr }}
+            </option>
+          </select>
+          <button type="button" class="btn btn-primary" (click)="addAnotherCat()">
+            <i class="bi bi-plus-square"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="currencyId" class="col-form-label">العملة</label>
+        <div class="d-flex flex-row ">
+          <select class="form-select" id="currencyId" formControlName="currencyId">
+            <option [value]="null">اختر عملة</option>
+            <option [value]="currency.id" *ngFor="let currency of Currency">
+              {{ currency.nameAr }}
+            </option>
+          </select>
+          <button type="button" class="btn btn-primary" (click)="addAnotherCurrency()">
+            <i class="bi bi-plus-square"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="providerDiscount" class="col-form-label">
+          خصم المورد
+        </label>
+        <input type="number" class="form-control" id="providerDiscount" formControlName="providerDiscount" />
+      </div>
+
+      <div class="col-md-3">
+        <label for="closeDealings" class="col-form-label">اقفال التعامل</label>
+        <select class=" form-select" id="closeDealings" formControlName="closeDealings">
+          <option [value]="transactionClose.Yes">نعم</option>
+          <option [value]="transactionClose.No">لا</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-4">
+        <label for="responsible" class="col-form-label">
+          المسئول
+        </label>
+        <input type="text" class="form-control" id="responsible" formControlName="responsible" />
+      </div>
+
+      <div class="col-md-4">
+        <label for="paymentMethod" class="col-form-label">طريقة السداد</label>
+        <select class="form-select" id="paymentMethod" formControlName="paymentMethod">
+          <option [value]="null">اختر طريقة للسداد</option>
+          <option [value]="PaymentMethod.later">اجل</option>
+          <option [value]="PaymentMethod.cash">نقدي</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="paymentPeriod" class="col-form-label">
+          <span>فترة السداد</span>
+          <span>&nbsp;</span>
+          <span class="small">(يوم)</span>
+        </label>
+        <input type="number" class="form-control" id="paymentPeriod" formControlName="paymentPeriod" />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="address" class="col-form-label">العنوان</label>
+        <input type="text" class="form-control" id="address" formControlName="address" />
+      </div>
+      <div class="col-md-6">
+        <label for="areaId" class="col-form-label">المنطقة</label>
+        <div class="d-flex flex-row ">
+          <select class="form-select" id="areaId" formControlName="areaId">
+            <option [value]="null">اختر المنطقة</option>
+            <option [value]="area.id" *ngFor="let area of Area">
+              {{ area.nameAr }}
+            </option>
+          </select>
+          <button type="button" class="btn btn-primary" (click)="addAnotherArea()">
+            <i class="bi bi-plus-square"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="phone" class="col-form-label">التليفون</label>
+        <input type="text" class="form-control" id="phone" formControlName="phone" />
+      </div>
+      <!-- <div class="col-md-6 d-flex align-items-end">
+        <input type="text" class="form-control" id="unitWeight" formControlName="unitWeight" />
+      </div> -->
+      <div class="col-md-6">
+        <label for="email" class="col-form-label d-flex justify-content-end">E-Mail</label>
+        <input type="text" class="form-control" id="email" formControlName="email" />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <label for="competentoffice" class="col-form-label">المأمورية المختصة</label>
+        <input type="text" class="form-control" id="competentoffice" formControlName="competentoffice" />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <label for="taxRegistrationNumber" class="col-form-label">رقم التسجيل الضريبي</label>
+        <input type="text" class="form-control" id="taxRegistrationNumber" formControlName="taxRegistrationNumber" />
+      </div>
+      <div class="col-md-6">
+        <label for="taxFileNumber" class="col-form-label">رقم االملف الضريبي</label>
+        <input type="text" class="form-control" id="taxFileNumber" formControlName="taxFileNumber" />
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-6">
+        <div class="col-md-12">
+          <label for="unitWeight" class="col-form-label ">رصيد اول المدة</label>
+          <input [disabled]="true" type="text" class="form-control" />
+        </div>
+        <div class="col-md-12">
+          <label for="unitWeight" class="col-form-label ">أقصي دين</label>
+          <input [disabled]="true" type="text" class="form-control" />
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="unitWeight" class="col-form-label ">رصيد حالي</label>
+            <input [disabled]="true" type="text" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label for="unitWeight" class="col-form-label ">رصيد حالى عملة</label>
+            <input [disabled]="true" type="text" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label for="unitWeight" class="col-form-label ">دين متاح</label>
+          <input [disabled]="true" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <table class="table mt-2">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">للاصناف</th>
+              <th scope="col">للخدمات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>ضريبة خصم أ.ت.ص</th>
+              <td>
+                <input type="number" class="form-control" id="discountTaxItems" formControlName="discountTaxItems" />
+              </td>
+              <td>
+                <input type="number" class="form-control" id="discountTaxServices"
+                  formControlName="discountTaxServices" />
+              </td>
+            </tr>
+            <!-- <tr>
+              <th>ضريبة اضافة أ.ت.ص</th>
+              <td> <input type="number" class="form-control" id="valueAddedTaxItems" formControlName="valueAddedTaxItems" />
+              </td>
+              <td> <input type="number" class="form-control" id="valueAddedTaxServices" formControlName="valueAddedTaxServices" />
+              </td>
+            </tr> -->
+            <tr>
+              <th>ضريبة المبيعات</th>
+              <td>
+                <select class="form-select" id="purchaseTax" formControlName="purchaseTax">
+                  <option [value]="purchaseTaxEnum.Yes">نعم</option>
+                  <option [value]="purchaseTaxEnum.No">لا</option>
+                </select>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <table class="table table-hover table-bordered mt-4">
+      <thead>
+        <tr>
+          <th scope="col">السنة</th>
+          <th scope="col">عدد الفواتير</th>
+          <th scope="col">المشتريات</th>
+          <th scope="col">المرتجع</th>
+          <th scope="col">صافي المشتريات</th>
+          <th scope="col">اخر تاريخ شراء المشتريات</th>
+          <th scope="col">اخر تاريخ سداد</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <button *ngIf="isEdit" class="btn btn-primary col-2 mt-5 fw-semibold" (click)="saveEdit()">حفظ</button>
+    <button *ngIf="!isEdit && !isView" class="btn btn-primary col-2 mt-5 fw-semibold"
+      (click)="onSubmit()">اضافة</button>
+    <div class="col-10"></div>
+    <a [routerLink]="['/items/grid']" class="d-inline-block col-2">العودة للقائمة</a>
+  </form>
+</div>
+
+
+

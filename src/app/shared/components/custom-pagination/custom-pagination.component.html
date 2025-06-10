@@ -1,0 +1,17 @@
+<nav aria-label="Pagination text-black">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+      <a class="page-link" (click)="previousPage()">
+        السابق
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let page of pages" [ngClass]="{ active: currentPage === page }">
+      <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: currentPage === pageCount || !pageCount }">
+      <a class="page-link" (click)="nextPage()">
+        التالي
+      </a>
+    </li>
+  </ul>
+</nav>

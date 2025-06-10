@@ -1,0 +1,31 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title">اضافة مجموعة</h4>
+  <button type="button" class="btn-close text-white" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body ">
+  <form class="container "  [formGroup]="categoryForm">
+    <div class="col-md-12 arabic-label">
+    <label for="name" class="col-form-label d-flex justify-content-end">
+      اسم المجموعة
+    </label>
+    <input type="text" class="form-control" id="nameAr" formControlName="nameAr" />
+  </div>
+  <div class="col-md-12 ">
+    <label for="name" class="col-form-label d-flex justify-content-end">
+      Category Name
+    </label>
+    <input type="text" class="form-control" id="nameEn" formControlName="nameEn" />
+  </div>
+  <!-- <div class="col-md-12 ">
+    <label for="name" class="col-form-label d-flex justify-content-end">
+      Internal Code
+    </label>
+    <input type="text" class="form-control" id="internalCode" formControlName="internalCode" />
+  </div> -->
+  </form>
+</div>
+
+<div class="modal-footer justify-content-around">
+  <button type="button" class="btn btn-danger" (click)="cancle()">الغاء</button>
+  <button type="button" class="btn btn-primary" (click)="addProviderCategory()">حفظ </button>
+</div>

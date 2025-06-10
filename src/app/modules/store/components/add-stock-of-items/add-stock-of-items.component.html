@@ -1,0 +1,64 @@
+<div class="modal-header bg-primary text-white">
+  <h4 class="modal-title">تعديل قيم الصنف في المخزن</h4>
+  <button
+    type="button"
+    class="btn-close text-white"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body ">
+  <form class="container " [formGroup]="itemStockForm">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th [colSpan]="2">رصيد حالى متاح</th>
+          <th [colSpan]="2">رصيد اول المده</th>
+        </tr>
+        <tr>
+          <th scope="col">قطعة</th>
+          <th scope="col">عبوة</th>
+          <th scope="col">قطعة</th>
+          <th scope="col">عبوة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input
+              type="number"
+              class="table-input"
+              [formControl]="itemStockForm.controls.currentAvailableBalancePiece"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input"
+              [formControl]="itemStockForm.controls.currentAvailableBalancePackage"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input"
+              [formControl]="itemStockForm.controls.balanceFirstPeriodPiece"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input"
+              [formControl]="itemStockForm.controls.balanceFirstPeriodPackage"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+<div class="modal-footer ">
+  <button type="button" class="btn btn-primary" (click)="submitForm()">حفظ</button>
+  <button type="button" class="btn btn-danger" (click)="cancle()">الغاء</button>
+</div>

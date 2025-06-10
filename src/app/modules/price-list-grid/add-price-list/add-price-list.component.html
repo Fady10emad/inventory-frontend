@@ -1,0 +1,24 @@
+<div class="my-5">
+  <form class="container row" (ngSubmit)="onSubmit()" [formGroup]="addPriceListForm">
+    <div class="col-md-6">
+      <label for="code" class="col-form-label">كود قائمة الأسعار :</label>
+      <input type="text" id="code" class="form-control" formControlName="code" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="description" class="col-form-label">الوصف :</label>
+      <input type="text" id="description" class="form-control" formControlName="description" />
+    </div>
+
+    <div class="col-md-6">
+      <label for="profitabilityRatio" class="col-form-label">نسبة الربح :</label>
+      <input type="text" id="profitabilityRatio" class="form-control" formControlName="profitabilityRatio"
+      (input)="acceptNumbersOnly($event,'profitabilityRatio')"
+      />
+    </div>
+
+    <div class="col-md-12 mt-4">
+      <button type="submit" class="btn btn-primary fw-semibold">إضافة قائمة الأسعار</button>
+    </div>
+  </form>
+</div>

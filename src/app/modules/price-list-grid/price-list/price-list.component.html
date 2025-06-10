@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center mt-3">
+  <h3 class="text-primary fw-semibold">جدول قوائم الاسعار</h3>
+</div>
+<div class="my-5">
+  <div class="row mb-4">
+    <div class="col-2">
+      <a class="btn btn-primary w-100 fw-semibold fw-bold" [routerLink]="addNewPriceList">
+        اضافة قائمة اسعار
+      </a>
+    </div>
+  </div>
+  <ejs-grid
+    #grid
+    [locale]="locale"
+    [enableRtl]="true"
+    [pageSettings]="pageSettings"
+    allowPaging="true"
+    (dataStateChange)="dataStateChange($event)"
+    (dataBound)="dataBound($event)"
+  >
+    <e-columns>
+      <e-column field="code" headerText="كود"></e-column>
+      <e-column field="description" headerText="الوصف"></e-column>
+      <e-column field="profitabilityRatio" headerText="نسبة الربحية"></e-column>
+      <e-column headerText="تعديل" width="110">
+        <ng-template #template let-data>
+          <div class="">
+            <button class="btn btn-sm text-primary" (click)="getMoreDetails(data.id)">
+              <i class="bi bi-pencil-square fs-4 fw-semibold"></i>
+            </button>
+          </div>
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-grid>
+</div>

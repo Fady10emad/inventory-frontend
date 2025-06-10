@@ -1,0 +1,64 @@
+<div class="my-5">
+  <form class="container row" [formGroup]="itemForm" (ngSubmit)="addNewPricesToItem()">
+    <div class="col-md-12" formArrayName="itemPrices">
+      <div
+        class="row"
+        *ngFor="let itemPrice of itemPricesFormArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="col-md-12 row">
+          <div class="col-md-3">
+            <label for="code" class="col-form-label">كود الصنف</label>
+            <input type="text" id="code" class="form-control" formControlName="code" />
+          </div>
+
+          <div class="col-md-3">
+            <label for="description" class="col-form-label">الوصف</label>
+            <input
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+            />
+          </div>
+
+          <div class="col-md-3">
+            <label for="profitRate" class="col-form-label">نسبة الربح</label>
+            <input
+              type="number"
+              id="profitRate"
+              class="form-control"
+              formControlName="profitRate"
+            />
+          </div>
+
+          <div class="col-md-3">
+            <label for="price" class="col-form-label">السعر</label>
+            <input type="number" id="price" class="form-control" formControlName="price" />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-2">
+            <button *ngIf="i > 0" type="button" class="btn btn-danger" (click)="removeItemPrice(i)">
+              حذف
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-3">
+          <hr />
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary col-2" (click)="addItemPrice()">
+          إضافة سعر اخر
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-success col-2 mt-5 fw-semibold">حفظ</button>
+      <div class="col-10"></div>
+      <a [routerLink]="['/items/grid']" class="d-inline-block col-2">العودة للقائمة</a>
+    </div>
+  </form>
+</div>
